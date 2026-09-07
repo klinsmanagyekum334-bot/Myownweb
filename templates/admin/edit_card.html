@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Card{% endblock %}
+
+{% block content %}
+<div class="admin-card-form">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Edit Card</h1>
+                <p>Update the image and text for this card</p>
+            </div>
+            
+            <form method="POST" action="{{ url_for('edit_card', card_id=card_id) }}" enctype="multipart/form-data" class="admin-form">
+                <div class="form-group">
+                    <label>Current Image</label>
+                    {% if card.image %}
+                        <div class="current-image">
+                            <img src="{{ url_for('static', filename='images/' + card.image) }}" alt="Current card image">
+                            <p>Current: {{ card.image }}</p>
+                        </div>
+                    {% else %}
+                        <p style="color: #6c757d;">No image uploaded for this card.</p>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="card_image">Upload New Image (optional)</label>
+                    <input type="file" id="card_image" name="card_image" accept="image/*">
+                    <small>Upload a new image to replace the current one (PNG, JPG, JPEG, GIF, WEBP)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card_text">Card Text</label>
+                    <textarea id="card_text" name="card_text" rows="6" placeholder="Enter the text description for this card...">{{ card.text }}</textarea>
+                    <small>You can use HTML tags for formatting (e.g., &lt;strong&gt;bold&lt;/strong&gt;, &lt;p&gt;paragraph&lt;/p&gt;)</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Changes</button>
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-card-form {
+    padding: 40px 0;
+    background: #f5f5f5;
+    min-height: 80vh;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h1 {
+    color: #1a1a2e;
+    font-size: 2rem;
+}
+
+.form-header p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.admin-form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.current-image {
+    margin: 10px 0;
+}
+
+.current-image img {
+    max-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.current-image p {
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #1a1a2e;
+    font-weight: 600;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #f7971e;
+}
+
+.form-group input[type="file"] {
+    display: block;
+    padding: 12px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-save, .btn-cancel {
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+    flex: 2;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+}
+
+.btn-cancel {
+    background: #e74c3c;
+    color: #fff;
+    flex: 1;
+}
+
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+}
+
+@media (max-width: 768px) {
+    .admin-form {
+        padding: 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}

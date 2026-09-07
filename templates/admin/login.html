@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="admin-login-container">
+    <div class="container">
+        <div class="login-box">
+            <div class="login-header">
+                <h2>Admin Login</h2>
+                <p>Enter your credentials to access the admin panel</p>
+            </div>
+            
+            <form method="POST" action="{{ url_for('admin_login') }}" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            
+            <div class="login-footer">
+                <a href="{{ url_for('index') }}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f2f5;
+}
+
+.login-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #1a1a2e;
+    margin-bottom: 5px;
+    font-size: 2rem;
+}
+
+.login-header p {
+    color: #7f8c8d;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #1a1a2e;
+    font-weight: 500;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #f7971e;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #f7971e, #ffd200);
+    color: #1a1a2e;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(247, 151, 30, 0.3);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-footer a {
+    color: #f7971e;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+</style>
+{% endblock %}

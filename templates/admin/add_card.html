@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Card{% endblock %}
+
+{% block content %}
+<div class="admin-card-form">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Add New Card</h1>
+                <p>Add a new image and text card to your website</p>
+                <a href="{{ url_for('admin_dashboard') }}" class="back-link">← Back to Dashboard</a>
+            </div>
+            
+            <form method="POST" action="{{ url_for('add_card') }}" enctype="multipart/form-data" class="admin-form">
+                <div class="form-group">
+                    <label for="card_image">Card Image</label>
+                    <input type="file" id="card_image" name="card_image" accept="image/*">
+                    <small>Upload an image for this card (PNG, JPG, JPEG, GIF, WEBP)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card_text">Card Text</label>
+                    <textarea id="card_text" name="card_text" rows="8" placeholder="Enter the text description for this card..."></textarea>
+                    <small>You can use HTML tags for formatting (e.g., &lt;strong&gt;bold&lt;/strong&gt;, &lt;p&gt;paragraph&lt;/p&gt;)</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-add">Add Card</button>
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-card-form {
+    padding: 40px 0;
+    background: #f0f2f5;
+    min-height: 80vh;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h1 {
+    color: #1a1a2e;
+    font-size: 2rem;
+}
+
+.form-header p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #f7971e;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.admin-form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #1a1a2e;
+    font-weight: 600;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    transition: border-color 0.3s;
+    min-height: 150px;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #f7971e;
+}
+
+.form-group input[type="file"] {
+    display: block;
+    padding: 12px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+    background: #fafafa;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-add {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 2;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 206, 201, 0.3);
+}
+
+.btn-cancel {
+    padding: 12px 30px;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+}
+
+@media (max-width: 768px) {
+    .admin-form {
+        padding: 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}
