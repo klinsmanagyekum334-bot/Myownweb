@@ -5,43 +5,61 @@ from werkzeug.utils import secure_filename
 from functools import wraps
 import firebase_admin
 from firebase_admin import credentials, firestore
+import json
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'ophyser-platform-secret-key-change-in-production'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ophyser-platform-secret-key')
 app.config['UPLOAD_FOLDER'] = 'static/images'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# Session configuration to prevent timeout issues
+# Session configuration
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=24)
 app.config['SESSION_REFRESH_EACH_REQUEST'] = True
 
-# Allowed extensions for image upload
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
-
-# Create upload folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# ===== FIREBASE FIRESTORE INITIALIZATION =====
+# ===== FIREBASE INITIALIZATION =====
+def get_firebase_credentials():
+    """Get Firebase credentials from environment or file"""
+    # Try environment variable first (for Render)
+    cred_json = os.environ.get('FIREBASE_CREDENTIALS')
+    if cred_json:
+        try:
+            return json.loads(cred_json)
+        except json.JSONDecodeError as e:
+            print(f"⚠️ Invalid JSON in FIREBASE_CREDENTIALS: {e}")
+    
+    # Try file (for local development)
+    cred_path = os.path.join(os.path.dirname(__file__), 'firebase-credentials.json')
+    if os.path.exists(cred_path):
+        try:
+            with open(cred_path, 'r') as f:
+                return json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"⚠️ Invalid JSON in firebase-credentials.json: {e}")
+    
+    return None
+
 def initialize_firebase():
     """Initialize Firebase Admin SDK"""
     try:
-        cred_path = os.path.join(os.path.dirname(__file__), 'firebase-credentials.json')
-        if os.path.exists(cred_path):
-            cred = credentials.Certificate(cred_path)
+        cred_dict = get_firebase_credentials()
+        if cred_dict:
+            cred = credentials.Certificate(cred_dict)
             firebase_admin.initialize_app(cred)
             print("✅ Firebase initialized successfully!")
             return firestore.client()
         else:
-            print("⚠️ firebase-credentials.json not found. Using mock database.")
+            print("⚠️ No Firebase credentials found. Using mock database.")
             return None
     except Exception as e:
         print(f"⚠️ Firebase error: {e}. Using mock database.")
         return None
 
-# Initialize Firestore
 db = initialize_firebase()
 
-# ===== DATABASE HELPER FUNCTIONS =====
+# ===== DATABASE FUNCTIONS =====
 
 def get_site_settings():
     """Fetch site settings from Firestore"""
@@ -103,7 +121,7 @@ def get_profile_cards():
         cards = []
         for doc in docs:
             card = doc.to_dict()
-            card['id'] = doc.id
+            card['id'] = doc.id  # Store the Firestore document ID
             cards.append(card)
         return cards
     except Exception as e:
@@ -186,7 +204,6 @@ def inject_now():
 
 # ===== ROUTES =====
 
-# Home Page
 @app.route('/')
 def index():
     settings = get_site_settings() or {}
@@ -213,7 +230,6 @@ def index():
 
 # ===== ADMIN ROUTES =====
 
-# Admin Login
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
     if session.get('admin_logged_in'):
@@ -223,10 +239,12 @@ def admin_login():
         username = request.form.get('username')
         password = request.form.get('password')
         
-        # Admin credentials - UPDATED PASSWORD
-        if username == 'admin' and password == 'Klinsman@ophyser1':
+        ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
+        ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'Klinsman@ophyser1')
+        
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             session['admin_logged_in'] = True
-            session.permanent = True  # Make session permanent
+            session.permanent = True
             flash('Successfully logged in!', 'success')
             return redirect(url_for('admin_dashboard'))
         else:
@@ -235,14 +253,12 @@ def admin_login():
     settings = get_site_settings() or {}
     return render_template('admin/login.html', site_title=settings.get('site_title', 'Ophyser Platform'))
 
-# Admin Logout
 @app.route('/admin/logout')
 def admin_logout():
     session.pop('admin_logged_in', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('index'))
 
-# Admin Dashboard
 @app.route('/admin/dashboard')
 @admin_required
 def admin_dashboard():
@@ -254,11 +270,9 @@ def admin_dashboard():
                          data=settings,
                          profile_cards=cards)
 
-# Admin Update Content
 @app.route('/admin/update', methods=['POST'])
 @admin_required
 def admin_update():
-    # Update text content
     text_keys = ['site_title', 'page_title', 'hero_title', 'hero_subtitle',
                  'main_content', 'about_text', 'contact_phone', 'contact_email',
                  'appointment_title', 'advert_title', 'advert_description',
@@ -309,7 +323,6 @@ def admin_update():
 
 # ===== PROFILE CARDS MANAGEMENT =====
 
-# Add Profile Card
 @app.route('/admin/cards/add', methods=['GET', 'POST'])
 @admin_required
 def add_card():
@@ -335,7 +348,6 @@ def add_card():
     settings = get_site_settings() or {}
     return render_template('admin/add_card.html', site_title=settings.get('site_title', 'Ophyser Platform'))
 
-# Edit Profile Card
 @app.route('/admin/cards/edit/<card_id>', methods=['GET', 'POST'])
 @admin_required
 def edit_card(card_id):
@@ -370,7 +382,6 @@ def edit_card(card_id):
                          card=card,
                          card_id=card_id)
 
-# Delete Profile Card
 @app.route('/admin/cards/delete/<card_id>')
 @admin_required
 def delete_card(card_id):
@@ -382,7 +393,6 @@ def delete_card(card_id):
 
 # ===== RUN APP =====
 if __name__ == '__main__':
-    # Run without debug mode to prevent reloader issues on mobile/Android
     app.run(
         debug=False,
         host='0.0.0.0',
