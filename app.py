@@ -9,7 +9,7 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ophyser-platform-secret-key')
-app.config['UPLOAD_FOLDER'] = 'static/image'
+app.config['UPLOAD_FOLDER'] = 'static/images'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Session configuration
@@ -280,6 +280,7 @@ def admin_update():
         if key in request.form:
             update_data[key] = request.form.get(key)
     
+    # Handle hero image upload
     if 'hero_image' in request.files:
         file = request.files['hero_image']
         if file and file.filename and allowed_file(file.filename):
@@ -289,6 +290,7 @@ def admin_update():
             update_data['hero_image'] = filename
             flash('Hero image uploaded successfully!', 'success')
     
+    # Handle profile image upload
     if 'profile_image' in request.files:
         file = request.files['profile_image']
         if file and file.filename and allowed_file(file.filename):
@@ -298,6 +300,7 @@ def admin_update():
             update_data['profile_image'] = filename
             flash('Profile image uploaded successfully!', 'success')
     
+    # Handle advert image upload
     if 'advert_image' in request.files:
         file = request.files['advert_image']
         if file and file.filename and allowed_file(file.filename):
