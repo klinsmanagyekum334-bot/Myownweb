@@ -22,7 +22,6 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # ===== FIREBASE INITIALIZATION =====
 def get_firebase_credentials():
     """Get Firebase credentials from environment or file"""
-    # Try environment variable first (for Render)
     cred_json = os.environ.get('FIREBASE_CREDENTIALS')
     if cred_json:
         try:
@@ -30,7 +29,6 @@ def get_firebase_credentials():
         except json.JSONDecodeError as e:
             print(f"⚠️ Invalid JSON in FIREBASE_CREDENTIALS: {e}")
     
-    # Try file (for local development)
     cred_path = os.path.join(os.path.dirname(__file__), 'firebase-credentials.json')
     if os.path.exists(cred_path):
         try:
@@ -72,7 +70,6 @@ def get_site_settings():
         if doc.exists:
             return doc.to_dict()
         
-        # Create default settings if they don't exist
         default_settings = {
             'site_title': 'Ophyser Platform',
             'page_title': 'Home',
@@ -83,7 +80,7 @@ def get_site_settings():
             'main_content': 'This is the main content of the website.',
             'about_text': 'This is the official website of Ophyser where your dreams comes true of being featured on a website without you owning your own website. Take control like your boss with your name and all information displayed like your personal website just click on the link to place your request.',
             'contact_phone': '0240044138',
-            'contact_email': 'klinsmanagykeum334@gmail.com',
+            'contact_email': 'klinsmanagyekum334@gmail.com',
             'appointment_title': 'FEATURED PROFILE',
             'advert_title': 'Business Advert',
             'advert_description': 'Promote your business here',
@@ -121,7 +118,7 @@ def get_profile_cards():
         cards = []
         for doc in docs:
             card = doc.to_dict()
-            card['id'] = doc.id  # Store the Firestore document ID
+            card['id'] = doc.id
             cards.append(card)
         return cards
     except Exception as e:
@@ -219,7 +216,7 @@ def index():
                          main_content=settings.get('main_content', ''),
                          about_text=settings.get('about_text', ''),
                          contact_phone=settings.get('contact_phone', '0240044138'),
-                         contact_email=settings.get('contact_email', 'Klinsmanagykeum334@gmail.com'),
+                         contact_email=settings.get('contact_email', 'klinsmanagyekum334@gmail.com'),
                          appointment_title=settings.get('appointment_title', 'FEATURED PROFILE'),
                          advert_title=settings.get('advert_title', 'Business Advert'),
                          advert_description=settings.get('advert_description', ''),
@@ -283,7 +280,6 @@ def admin_update():
         if key in request.form:
             update_data[key] = request.form.get(key)
     
-    # Handle hero image upload
     if 'hero_image' in request.files:
         file = request.files['hero_image']
         if file and file.filename and allowed_file(file.filename):
@@ -293,7 +289,6 @@ def admin_update():
             update_data['hero_image'] = filename
             flash('Hero image uploaded successfully!', 'success')
     
-    # Handle profile image upload
     if 'profile_image' in request.files:
         file = request.files['profile_image']
         if file and file.filename and allowed_file(file.filename):
@@ -303,7 +298,6 @@ def admin_update():
             update_data['profile_image'] = filename
             flash('Profile image uploaded successfully!', 'success')
     
-    # Handle advert image upload
     if 'advert_image' in request.files:
         file = request.files['advert_image']
         if file and file.filename and allowed_file(file.filename):
