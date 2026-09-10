@@ -83,7 +83,7 @@ def get_site_settings():
             'main_content': 'This is the main content of the website.',
             'about_text': 'This is the official website of Ophyser where your dreams comes true of being featured on a website without you owning your own website. Take control like your boss with your name and all information displayed like your personal website just click on the link to place your request.',
             'contact_phone': '0240044138',
-            'contact_email': 'Klinsmanagykeum334@gmail.com',
+            'contact_email': 'klinsmanagykeum334@gmail.com',
             'appointment_title': 'FEATURED PROFILE',
             'advert_title': 'Business Advert',
             'advert_description': 'Promote your business here',
