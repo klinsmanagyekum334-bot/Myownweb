@@ -20,7 +20,6 @@
                         </div>
                     {% endif %}
                 </div>
-                <!-- Text under the hero image -->
                 {% if hero_text_under %}
                     <div class="hero-text-under">
                         {{ hero_text_under }}
@@ -39,7 +38,8 @@
             <h2 class="section-title">{{ hero_title|default('OPHYSER PLATFORM') }}</h2>
             <h3 class="section-subtitle">FEATURES OPEN</h3>
             <div class="featured-grid">
-                <!-- Birthday Image Card -->
+
+                <!-- Birthday Image Card + Text -->
                 <div class="featured-card image-card">
                     {% if hero_image %}
                         <img src="{{ url_for('static', filename='images/' + hero_image) }}" 
@@ -50,9 +50,12 @@
                             <p>Upload image for birthday feature</p>
                         </div>
                     {% endif %}
+                    {% if birthday_text %}
+                        <div class="birthday-text">{{ birthday_text|safe }}</div>
+                    {% endif %}
                 </div>
 
-                <!-- Dynamic Profile Cards - EACH IS ITS OWN GRID ITEM -->
+                <!-- Dynamic Profile Cards -->
                 {% if profile_cards %}
                     {% for card in profile_cards %}
                         <div class="featured-card dynamic-card">
@@ -74,12 +77,12 @@
                     {% endfor %}
                 {% endif %}
 
-                <!-- Business Advert Card -->
+                <!-- Advert 1 -->
                 <div class="featured-card advert-card">
                     <div class="advert-image-wrapper">
-                        {% if advert_image %}
-                            <img src="{{ url_for('static', filename='images/' + advert_image) }}" 
-                                 alt="Advert Image" class="advert-image">
+                        {% if advert_1_image %}
+                            <img src="{{ url_for('static', filename='images/' + advert_1_image) }}" 
+                                 alt="Advert 1" class="advert-image">
                         {% else %}
                             <div class="advert-placeholder">
                                 <span>🛒</span>
@@ -88,14 +91,38 @@
                         {% endif %}
                     </div>
                     <div class="advert-content">
-                        <h3 class="advert-title">{{ advert_title|default('Business Advert') }}</h3>
-                        <p class="advert-description">{{ advert_description|default('Promote your business here') }}</p>
+                        <h3 class="advert-title">{{ advert_1_title|default('Business Advert') }}</h3>
+                        <p class="advert-description">{{ advert_1_description|default('Promote your business here') }}</p>
                         <div class="advert-details">
-                            <span class="advert-price">{{ advert_price|default('Price: Contact for details') }}</span>
-                            <span class="advert-contact">{{ advert_contact|default('Phone: 0240044138') }}</span>
+                            <span class="advert-price">{{ advert_1_price|default('Price: Contact for details') }}</span>
+                            <span class="advert-contact">{{ advert_1_contact|default('Phone: 0240044138') }}</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Advert 2 -->
+                <div class="featured-card advert-card">
+                    <div class="advert-image-wrapper">
+                        {% if advert_2_image %}
+                            <img src="{{ url_for('static', filename='images/' + advert_2_image) }}" 
+                                 alt="Advert 2" class="advert-image">
+                        {% else %}
+                            <div class="advert-placeholder">
+                                <span>🛒</span>
+                                <p>Upload advert image</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="advert-content">
+                        <h3 class="advert-title">{{ advert_2_title|default('Business Advert 2') }}</h3>
+                        <p class="advert-description">{{ advert_2_description|default('Promote your business here') }}</p>
+                        <div class="advert-details">
+                            <span class="advert-price">{{ advert_2_price|default('Price: Contact for details') }}</span>
+                            <span class="advert-contact">{{ advert_2_contact|default('Phone: 0240044138') }}</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -104,7 +131,7 @@
             <div class="container">
                 <h2 class="section-title">ABOUT OPHYSER</h2>
                 <div class="about-content">
-                    {{ about_text|default('This is the official website of Ophyser where your dreams comes true of being featured on a website without you owning your own website. Take control like your boss with your name and all information displayed like your personal website just click on the link to place your request.') }}
+                    {{ about_text|default('This is the official website of Ophyser where your dreams comes true of being featured on a website without you owning your own website.') }}
                 </div>
             </div>
         </section>
@@ -114,32 +141,20 @@
             <div class="container">
                 <h2 class="section-title">OUR SERVICES</h2>
                 <p class="news-subtitle">Click on a service to start a WhatsApp conversation</p>
-                
                 <div class="news-grid">
-                    <!-- Birthday Feature -->
-                    <a href="https://api.whatsapp.com/send?phone=233240044138&text=Hi%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20be%20featured%20on%20your%20platform%20for%20a%20birthday.%20My%20contact%20is%200240044138" 
-                       target="_blank" 
-                       class="news-card service-link">
+                    <a href="https://api.whatsapp.com/send?phone=233240044138&text=Hi%2C%20I%20want%20a%20birthday%20feature" target="_blank" class="news-card service-link">
                         <div class="news-badge">⭐ NEW</div>
                         <h3>BIRTHDAY FEATURE</h3>
                         <p>Celebrate your special day with us</p>
                         <div class="news-meta">Click to request</div>
                     </a>
-
-                    <!-- Profile Showcase -->
-                    <a href="https://api.whatsapp.com/send?phone=233240044138&text=Hi%2C%20I%20want%20to%20be%20featured%20on%20your%20platform%20with%20my%20profile.%20Please%20help%20me%20get%20featured." 
-                       target="_blank" 
-                       class="news-card service-link">
+                    <a href="https://api.whatsapp.com/send?phone=233240044138&text=Hi%2C%20I%20want%20a%20profile%20feature" target="_blank" class="news-card service-link">
                         <div class="news-badge">📢</div>
                         <h3>PROFILE SHOWCASE</h3>
                         <p>Get your profile featured on the front page</p>
                         <div class="news-meta">Click to request</div>
                     </a>
-
-                    <!-- Business Advert -->
-                    <a href="https://api.whatsapp.com/send?phone=233240044138&text=Hi%2C%20I%20would%20like%20to%20advertise%20my%20business%20on%20your%20platform.%20Please%20contact%20me." 
-                       target="_blank" 
-                       class="news-card service-link">
+                    <a href="https://api.whatsapp.com/send?phone=233240044138&text=Hi%2C%20I%20want%20to%20advertise" target="_blank" class="news-card service-link">
                         <div class="news-badge">🏆</div>
                         <h3>BUSINESS ADVERT</h3>
                         <p>Promote your business to our audience</p>
@@ -149,7 +164,7 @@
             </div>
         </section>
 
-        <!-- Appointment/Announcement Section -->
+        <!-- Appointment Section -->
         <section class="appointment-section">
             <div class="container">
                 <div class="appointment-card">
@@ -161,13 +176,13 @@
                             {% else %}
                                 <div class="placeholder-image">
                                     <span>📸</span>
-                                    <p>This is the official website of Ophyser where you can upload all your information to be featured on your website.</p>
+                                    <p>This is the official website of Ophyser.</p>
                                 </div>
                             {% endif %}
                         </div>
                         <div class="appointment-text">
                             <h3>{{ appointment_title|default('FEATURED PROFILE') }}</h3>
-                            <p>{{ main_content|default('This is the official website of Ophyser where you can upload all your information to be featured on your website.') }}</p>
+                            <p>{{ main_content|default('This is the official website of Ophyser.') }}</p>
                         </div>
                     </div>
                 </div>
@@ -183,7 +198,7 @@
         <div class="contact-content">
             <p><strong>Phone:</strong> {{ contact_phone|default('0240044138') }}</p>
             <p><strong>Email:</strong> {{ contact_email|default('klinsmanagyekum334@gmail.com') }}</p>
-            <p><strong>TikTok:</strong> <a href="https://www.tiktok.com/@ophyser?_r=1&_t=ZS-99Ikd5DyfDj" target="_blank">Ophyser</a></p>
+            <p><strong>TikTok:</strong> <a href="https://www.tiktok.com/@ophyser" target="_blank">Ophyser</a></p>
         </div>
     </div>
 </section>
