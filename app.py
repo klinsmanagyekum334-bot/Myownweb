@@ -75,6 +75,7 @@ def get_site_settings():
             'page_title': 'Home',
             'hero_title': 'OPHYSER PLATFORM',
             'hero_subtitle': '2026 / 2027 FEATURES OPEN',
+            'hero_text_under': '',
             'hero_image': None,
             'profile_image': None,
             'main_content': 'This is the main content of the website.',
@@ -211,6 +212,7 @@ def index():
                          page_title=settings.get('page_title', 'Home'),
                          hero_title=settings.get('hero_title', 'OPHYSER PLATFORM'),
                          hero_subtitle=settings.get('hero_subtitle', '2026 / 2027 FEATURES OPEN'),
+                         hero_text_under=settings.get('hero_text_under', ''),
                          hero_image=settings.get('hero_image'),
                          profile_image=settings.get('profile_image'),
                          main_content=settings.get('main_content', ''),
@@ -271,9 +273,9 @@ def admin_dashboard():
 @admin_required
 def admin_update():
     text_keys = ['site_title', 'page_title', 'hero_title', 'hero_subtitle',
-                 'main_content', 'about_text', 'contact_phone', 'contact_email',
-                 'appointment_title', 'advert_title', 'advert_description',
-                 'advert_price', 'advert_contact']
+                 'hero_text_under', 'main_content', 'about_text', 'contact_phone',
+                 'contact_email', 'appointment_title', 'advert_title',
+                 'advert_description', 'advert_price', 'advert_contact']
     
     update_data = {}
     for key in text_keys:
