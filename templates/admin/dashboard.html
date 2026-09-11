@@ -49,6 +49,12 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="hero_text_under">Text Under Hero Image</label>
+                        <textarea id="hero_text_under" name="hero_text_under" rows="3">{{ data.hero_text_under if data else '' }}</textarea>
+                        <small>Text shown under the profile image in the hero section</small>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="hero_image">Hero Image (Birthday Card Image)</label>
                         {% if data and data.hero_image %}
                             <div class="current-image">
