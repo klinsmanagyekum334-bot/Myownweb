@@ -55,24 +55,33 @@ body { font-family: 'Inter', 'Arial', sans-serif; background: #f5f5f5; color: #1
 .featured-section { background: #fff; padding: 50px 40px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 40px; text-align: center; overflow: hidden; }
 .section-title { font-size: 2rem; font-weight: 800; color: #1a1a2e; margin-bottom: 5px; letter-spacing: 2px; }
 .section-subtitle { font-size: 1.2rem; color: #f7971e; margin-bottom: 30px; font-weight: 600; letter-spacing: 3px; }
-.featured-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 30px; margin-bottom: 30px; max-width: 100%; width: 100%; overflow: hidden; }
+.featured-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 30px; margin-bottom: 30px; max-width: 100%; width: 100%; overflow: hidden; align-items: start; }
 .featured-grid > * { min-width: 0; }
-.featured-card { background: #f8f9fa; padding: 30px 20px; border-radius: 8px; transition: all 0.3s; border: 1px solid #e9ecef; max-width: 100%; overflow: hidden; width: 100%; }
+.featured-card { background: #f8f9fa; padding: 0; border-radius: 8px; transition: all 0.3s; border: 1px solid #e9ecef; max-width: 100%; overflow: hidden; width: 100%; display: flex; flex-direction: column; }
 .featured-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-color: #f7971e; }
 
-/* ===== BIRTHDAY CARD ===== */
-.featured-card.image-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; background: #1a1a2e; min-height: 600px; }
-.featured-card.image-card .featured-image { width: 100%; height: 450px; object-fit: contain; background: #1a1a2e; display: block; max-width: 100%; }
-.placeholder-image-card { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 450px; color: #6c757d; font-size: 0.9rem; padding: 20px; background: #f8f9fa; }
+/* ===== ALL IMAGES: FULL, HUGE, NO CROPPING ===== */
+.featured-card .featured-image,
+.featured-card .advert-image,
+.featured-card .dynamic-card-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+/* BIRTHDAY CARD */
+.featured-card.image-card .featured-image { width: 100%; height: auto; display: block; }
+.placeholder-image-card { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 300px; color: #6c757d; font-size: 0.9rem; padding: 20px; background: #f8f9fa; }
 .placeholder-image-card span { font-size: 3rem; margin-bottom: 10px; }
-.birthday-text { padding: 20px; text-align: center; font-size: 1rem; line-height: 1.7; font-weight: 700; background-color: #fff; word-wrap: break-word; overflow-wrap: break-word; flex: 1; display: flex; align-items: center; justify-content: center; }
+.birthday-text { padding: 20px; text-align: center; font-size: 1rem; line-height: 1.7; font-weight: 700; background-color: #fff; word-wrap: break-word; overflow-wrap: break-word; }
 .birthday-text * { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f7971e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-/* ===== ADVERT CARD ===== */
-.featured-card.advert-card { padding: 0; overflow: hidden; background: #fff; display: flex; flex-direction: column; border: 1px solid #e9ecef; max-width: 100%; width: 100%; min-height: 600px; }
-.advert-image-wrapper { width: 100%; height: 450px; background: #1a1a2e; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.advert-image { width: 100%; height: 100%; object-fit: contain; display: block; max-width: 100%; }
-.advert-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; font-size: 0.9rem; background: #f8f9fa; }
+/* ADVERT CARD */
+.advert-image-wrapper { width: 100%; height: auto; background: #fff; overflow: hidden; flex-shrink: 0; display: block; }
+.advert-image { width: 100%; height: auto; display: block; }
+.advert-placeholder { width: 100%; min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; font-size: 0.9rem; background: #f8f9fa; }
 .advert-placeholder span { font-size: 3rem; margin-bottom: 8px; }
 .advert-content { padding: 20px; text-align: left; flex: 1; display: flex; flex-direction: column; gap: 8px; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; background: #fff; }
 .advert-title { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; margin: 0; word-wrap: break-word; }
@@ -81,11 +90,10 @@ body { font-family: 'Inter', 'Arial', sans-serif; background: #f5f5f5; color: #1
 .advert-price { font-weight: 600; color: #f7971e; font-size: 0.95rem; }
 .advert-contact { font-size: 0.85rem; color: #6c757d; }
 
-/* ===== DYNAMIC CARD ===== */
-.featured-grid .dynamic-card { padding: 0 !important; width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; overflow: hidden !important; background: #fff !important; border: 1px solid #e9ecef !important; border-radius: 8px !important; display: flex !important; flex-direction: column !important; min-height: 600px; }
-.dynamic-card-image-wrapper { width: 100%; height: 450px; overflow: hidden; flex-shrink: 0; background: #1a1a2e; display: flex; align-items: center; justify-content: center; }
-.dynamic-card-image { display: block; width: 100% !important; height: 100% !important; max-width: 100% !important; object-fit: contain !important; }
-.dynamic-card-placeholder { width: 100%; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; font-size: 0.9rem; background: #f8f9fa; flex-shrink: 0; }
+/* DYNAMIC CARD */
+.dynamic-card-image-wrapper { width: 100%; height: auto; overflow: hidden; flex-shrink: 0; background: #fff; display: block; }
+.dynamic-card-image { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; }
+.dynamic-card-placeholder { width: 100%; min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; font-size: 0.9rem; background: #f8f9fa; }
 .dynamic-card-placeholder span { font-size: 3rem; margin-bottom: 8px; }
 .dynamic-card-content { padding: 20px; width: 100%; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; word-break: break-word; flex: 1; background: #fff; }
 .dynamic-card-content p { margin: 0 0 8px 0; }
@@ -113,7 +121,7 @@ body { font-family: 'Inter', 'Arial', sans-serif; background: #f5f5f5; color: #1
 .appointment-badge { background: #f7971e; color: #1a1a2e; padding: 10px 20px; font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; }
 .appointment-content { display: grid; grid-template-columns: 300px 1fr; gap: 30px; padding: 30px; }
 .appointment-image { background: #f8f9fa; border-radius: 8px; overflow: hidden; min-height: 200px; }
-.appointment-image img { width: 100%; height: 100%; object-fit: cover; }
+.appointment-image img { width: 100%; height: auto; display: block; }
 .placeholder-image { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6c757d; font-size: 0.9rem; padding: 40px 20px; }
 .appointment-text h3 { font-size: 1.3rem; color: #1a1a2e; margin-bottom: 15px; font-weight: 700; }
 .appointment-text p { color: #2d3436; line-height: 1.8; }
@@ -142,14 +150,6 @@ body { font-family: 'Inter', 'Arial', sans-serif; background: #f5f5f5; color: #1
     .appointment-content { grid-template-columns: 1fr; }
     .hero-banner { padding: 100px 0; min-height: 400px; }
     .profile-avatar-wrapper { width: 150px; height: 150px; }
-    .advert-image-wrapper { height: 380px; }
-    .advert-card { min-height: 530px; }
-    .dynamic-card-image-wrapper { height: 380px; }
-    .dynamic-card-image { height: 380px !important; }
-    .dynamic-card { min-height: 530px; }
-    .featured-card.image-card { min-height: 530px; }
-    .featured-card.image-card .featured-image { height: 380px; }
-    .placeholder-image-card { height: 380px; }
 }
 
 @media (max-width: 768px) {
@@ -163,16 +163,6 @@ body { font-family: 'Inter', 'Arial', sans-serif; background: #f5f5f5; color: #1
     .round-avatar-placeholder { font-size: 3rem; }
     .banner-text h1 { font-size: 2rem; }
     .banner-text h2 { font-size: 1.2rem; }
-
-    .advert-image-wrapper { height: 350px; }
-    .advert-card { min-height: 500px; }
-    .dynamic-card-image-wrapper { height: 350px; }
-    .dynamic-card-image { height: 350px !important; }
-    .dynamic-card-placeholder { height: 350px !important; }
-    .dynamic-card { min-height: 500px; }
-    .featured-card.image-card { min-height: 500px; }
-    .featured-card.image-card .featured-image { height: 350px; }
-    .placeholder-image-card { height: 350px; }
 }
 
 @media (max-width: 480px) {
@@ -183,17 +173,6 @@ body { font-family: 'Inter', 'Arial', sans-serif; background: #f5f5f5; color: #1
     .hero-banner { padding: 60px 0; min-height: 300px; }
     .profile-avatar-wrapper { width: 100px; height: 100px; }
     .round-avatar-placeholder { font-size: 2.5rem; }
-
-    .advert-image-wrapper { height: 300px; }
-    .advert-card { min-height: 450px; }
-    .dynamic-card-image-wrapper { height: 300px; }
-    .dynamic-card-image { height: 300px !important; }
-    .dynamic-card-placeholder { height: 300px !important; }
-    .dynamic-card { min-height: 450px; }
-    .featured-card.image-card { min-height: 450px; }
-    .featured-card.image-card .featured-image { height: 300px; }
-    .placeholder-image-card { height: 300px; }
-
     .advert-details { flex-direction: column; align-items: flex-start; gap: 5px; }
     .appointment-content { padding: 15px; }
     .dynamic-card-content { padding: 15px !important; }
