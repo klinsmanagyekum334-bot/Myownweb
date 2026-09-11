@@ -4,22 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ site_title|default('Ophyser Platform') }}{% endblock %}</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
-    
-    <!-- Google Fonts -->
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
+
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -30,16 +22,18 @@
                     </a>
                 </div>
             </div>
-            
-            <div class="nav-center">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                </div>
+
+            <!-- Expandable Search -->
+            <div class="nav-search" id="navSearch">
+                <button class="search-toggle" id="searchToggle" aria-label="Search">
+                    🔍
+                </button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search the site..." autocomplete="off">
             </div>
-            
-            <div class="nav-right">
+
+            <div class="nav-right" id="navRight">
                 <a href="{{ url_for('index') }}" class="nav-link active">Home</a>
-                
+
                 {% if session.get('admin_logged_in') %}
                     <a href="{{ url_for('admin_dashboard') }}" class="nav-link">Admin</a>
                     <a href="{{ url_for('admin_logout') }}" class="nav-link">Logout</a>
@@ -47,14 +41,23 @@
                     <a href="{{ url_for('admin_login') }}" class="nav-link">Admin</a>
                 {% endif %}
             </div>
-            
-            <div class="hamburger">
+
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
     </nav>
+
+    <!-- Search Results Overlay -->
+    <div class="search-results-overlay" id="searchResultsOverlay">
+        <div class="search-results-box">
+            <h3>Search Results</h3>
+            <div id="searchResultsList"></div>
+            <button class="search-close" id="searchClose">Close</button>
+        </div>
+    </div>
 
     <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -95,7 +98,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
