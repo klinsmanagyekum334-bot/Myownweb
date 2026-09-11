@@ -202,7 +202,7 @@ body {
     }
 }
 
-/* ===== HERO BANNER (TALLER) ===== */
+/* ===== HERO BANNER ===== */
 .hero-banner {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     padding: 120px 0;
@@ -242,7 +242,22 @@ body {
     overflow-wrap: break-word;
 }
 
-/* ===== ROUND AVATAR (LARGER) ===== */
+/* ===== HERO TEXT UNDER IMAGE ===== */
+.hero-text-under {
+    margin-top: 25px;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.8;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* ===== ROUND AVATAR ===== */
 .profile-avatar-wrapper {
     margin: 30px auto 0;
     width: 180px;
@@ -375,6 +390,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 300px;
 }
 
 .featured-card.image-card .featured-image {
@@ -397,7 +413,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-    min-height: 200px;
+    min-height: 300px;
     color: #6c757d;
     font-size: 0.9rem;
     padding: 20px;
@@ -409,7 +425,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* ===== BUSINESS ADVERT CARD ===== */
+/* ===== BUSINESS ADVERT CARD (SAME HEIGHT AS HERO) ===== */
 .featured-card.advert-card {
     padding: 0;
     overflow: hidden;
@@ -419,11 +435,12 @@ body {
     border: 1px solid #e9ecef;
     max-width: 100%;
     width: 100%;
+    min-height: 450px;
 }
 
 .advert-image-wrapper {
     width: 100%;
-    height: 180px;
+    height: 300px;
     background: #f8f9fa;
     overflow: hidden;
     flex-shrink: 0;
@@ -525,6 +542,7 @@ body {
     border-radius: 8px !important;
     display: flex !important;
     flex-direction: column !important;
+    min-height: 450px;
 }
 
 .featured-grid .dynamic-card:hover {
@@ -535,7 +553,7 @@ body {
 
 .dynamic-card-image-wrapper {
     width: 100%;
-    height: 180px;
+    height: 300px;
     overflow: hidden;
     flex-shrink: 0;
     background: #f8f9fa;
@@ -544,14 +562,14 @@ body {
 .dynamic-card-image {
     display: block;
     width: 100% !important;
-    height: 180px !important;
+    height: 300px !important;
     max-width: 100% !important;
     object-fit: cover !important;
 }
 
 .dynamic-card-placeholder {
     width: 100%;
-    height: 180px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -862,6 +880,26 @@ body {
         width: 150px;
         height: 150px;
     }
+    
+    .advert-image-wrapper {
+        height: 250px;
+    }
+    
+    .advert-card {
+        min-height: 400px;
+    }
+    
+    .dynamic-card-image-wrapper {
+        height: 250px;
+    }
+    
+    .dynamic-card-image {
+        height: 250px !important;
+    }
+    
+    .dynamic-card {
+        min-height: 400px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -907,19 +945,27 @@ body {
     }
     
     .advert-image-wrapper {
-        height: 150px !important;
+        height: 220px;
+    }
+    
+    .advert-card {
+        min-height: 350px;
     }
     
     .dynamic-card-image-wrapper {
-        height: 150px !important;
+        height: 220px;
     }
     
     .dynamic-card-image {
-        height: 150px !important;
+        height: 220px !important;
     }
     
     .dynamic-card-placeholder {
-        height: 150px !important;
+        height: 220px !important;
+    }
+    
+    .dynamic-card {
+        min-height: 350px;
     }
     
     .banner-text h1 {
@@ -928,6 +974,10 @@ body {
     
     .banner-text h2 {
         font-size: 1.2rem;
+    }
+    
+    .hero-text-under {
+        font-size: 1rem;
     }
 }
 
@@ -963,19 +1013,27 @@ body {
     }
     
     .advert-image-wrapper {
-        height: 120px !important;
+        height: 180px;
+    }
+    
+    .advert-card {
+        min-height: 300px;
     }
     
     .dynamic-card-image-wrapper {
-        height: 120px !important;
+        height: 180px;
     }
     
     .dynamic-card-image {
-        height: 120px !important;
+        height: 180px !important;
     }
     
     .dynamic-card-placeholder {
-        height: 120px !important;
+        height: 180px !important;
+    }
+    
+    .dynamic-card {
+        min-height: 300px;
     }
     
     .advert-details {
@@ -994,6 +1052,11 @@ body {
     
     .featured-section {
         padding: 20px 15px;
+    }
+    
+    .hero-text-under {
+        font-size: 0.95rem;
+        padding: 0 15px;
     }
 }
 
