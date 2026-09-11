@@ -13,47 +13,43 @@
                 <a href="{{ url_for('admin_logout') }}" class="btn-logout">Logout</a>
             </div>
         </div>
-        
+
         <div class="dashboard-content">
             <form method="POST" action="{{ url_for('admin_update') }}" enctype="multipart/form-data" class="admin-form">
-                
-                <!-- ===== SITE SETTINGS ===== -->
+
+                <!-- SITE SETTINGS -->
                 <div class="form-section">
                     <h3>Site Settings</h3>
-                    
                     <div class="form-group">
                         <label for="site_title">Site Title</label>
                         <input type="text" id="site_title" name="site_title" value="{{ data.site_title if data else 'Ophyser Platform' }}" required>
-                        <small>This appears in the browser tab and header</small>
                     </div>
-                    
                     <div class="form-group">
                         <label for="page_title">Page Title</label>
                         <input type="text" id="page_title" name="page_title" value="{{ data.page_title if data else 'Home' }}" required>
-                        <small>This appears on the main page</small>
                     </div>
                 </div>
-                
-                <!-- ===== HERO SECTION ===== -->
+
+                <!-- HERO SECTION -->
                 <div class="form-section">
                     <h3>Hero / Banner Section</h3>
-                    
+
                     <div class="form-group">
                         <label for="hero_title">Hero Title</label>
                         <input type="text" id="hero_title" name="hero_title" value="{{ data.hero_title if data else 'OPHYSER PLATFORM' }}" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="hero_subtitle">Hero Subtitle</label>
                         <input type="text" id="hero_subtitle" name="hero_subtitle" value="{{ data.hero_subtitle if data else '' }}">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="hero_text_under">Text Under Hero Image</label>
                         <textarea id="hero_text_under" name="hero_text_under" rows="3">{{ data.hero_text_under if data else '' }}</textarea>
                         <small>Text shown under the profile image in the hero section</small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="hero_image">Hero Image (Birthday Card Image)</label>
                         {% if data and data.hero_image %}
@@ -63,9 +59,8 @@
                             </div>
                         {% endif %}
                         <input type="file" id="hero_image" name="hero_image" accept="image/*">
-                        <small>Upload a new image (PNG, JPG, JPEG, GIF, WEBP)</small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="profile_image">Profile Image (Round Avatar)</label>
                         {% if data and data.profile_image %}
@@ -75,104 +70,126 @@
                             </div>
                         {% endif %}
                         <input type="file" id="profile_image" name="profile_image" accept="image/*">
-                        <small>Upload a square image; it will be displayed as a circle</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday_text">Birthday Card Text</label>
+                        <textarea id="birthday_text" name="birthday_text" rows="3">{{ data.birthday_text if data else '' }}</textarea>
+                        <small>Colorful styled text shown under the birthday image</small>
                     </div>
                 </div>
-                
-                <!-- ===== MAIN CONTENT ===== -->
+
+                <!-- MAIN CONTENT -->
                 <div class="form-section">
                     <h3>Main Content</h3>
-                    
                     <div class="form-group">
                         <label for="main_content">Featured Profile Text</label>
                         <textarea id="main_content" name="main_content" rows="10">{{ data.main_content if data else '' }}</textarea>
-                        <small>You can use HTML tags for formatting.</small>
                     </div>
                 </div>
-                
-                <!-- ===== ABOUT SECTION ===== -->
+
+                <!-- ABOUT SECTION -->
                 <div class="form-section">
                     <h3>About Section</h3>
-                    
                     <div class="form-group">
                         <label for="about_text">About Text</label>
                         <textarea id="about_text" name="about_text" rows="6">{{ data.about_text if data else '' }}</textarea>
-                        <small>This appears in the "About Ophyser" section</small>
                     </div>
                 </div>
-                
-                <!-- ===== APPOINTMENT SECTION ===== -->
+
+                <!-- APPOINTMENT SECTION -->
                 <div class="form-section">
                     <h3>Appointment / Featured Profile Section</h3>
-                    
                     <div class="form-group">
                         <label for="appointment_title">Appointment Title</label>
                         <input type="text" id="appointment_title" name="appointment_title" value="{{ data.appointment_title if data else 'FEATURED PROFILE' }}">
-                        <small>Title for the featured profile section</small>
                     </div>
                 </div>
-                
-                <!-- ===== BUSINESS ADVERT ===== -->
+
+                <!-- BUSINESS ADVERT 1 -->
                 <div class="form-section">
-                    <h3>Business Advert</h3>
-                    
+                    <h3>Business Advert 1</h3>
+
                     <div class="form-group">
-                        <label for="advert_title">Advert Title</label>
-                        <input type="text" id="advert_title" name="advert_title" value="{{ data.advert_title if data else 'Business Advert' }}">
+                        <label for="advert_1_title">Advert 1 Title</label>
+                        <input type="text" id="advert_1_title" name="advert_1_title" value="{{ data.advert_1_title if data else 'Business Advert' }}">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="advert_description">Advert Description</label>
-                        <textarea id="advert_description" name="advert_description" rows="3">{{ data.advert_description if data else '' }}</textarea>
+                        <label for="advert_1_description">Advert 1 Description</label>
+                        <textarea id="advert_1_description" name="advert_1_description" rows="3">{{ data.advert_1_description if data else '' }}</textarea>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="advert_price">Price / Offer</label>
-                        <input type="text" id="advert_price" name="advert_price" value="{{ data.advert_price if data else '' }}">
+                        <label for="advert_1_price">Price / Offer</label>
+                        <input type="text" id="advert_1_price" name="advert_1_price" value="{{ data.advert_1_price if data else '' }}">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="advert_contact">Contact Info</label>
-                        <input type="text" id="advert_contact" name="advert_contact" value="{{ data.advert_contact if data else '' }}">
+                        <label for="advert_1_contact">Contact Info</label>
+                        <input type="text" id="advert_1_contact" name="advert_1_contact" value="{{ data.advert_1_contact if data else '' }}">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="advert_image">Advert Image</label>
-                        {% if data and data.advert_image %}
+                        <label for="advert_1_image">Advert 1 Image</label>
+                        {% if data and data.advert_1_image %}
                             <div class="current-image">
-                                <img src="{{ url_for('static', filename='images/' + data.advert_image) }}" alt="Current advert image" style="max-width:200px;">
-                                <p>Current: {{ data.advert_image }}</p>
+                                <img src="{{ url_for('static', filename='images/' + data.advert_1_image) }}" alt="Current advert 1 image" style="max-width:200px;">
+                                <p>Current: {{ data.advert_1_image }}</p>
                             </div>
                         {% endif %}
-                        <input type="file" id="advert_image" name="advert_image" accept="image/*">
+                        <input type="file" id="advert_1_image" name="advert_1_image" accept="image/*">
                     </div>
                 </div>
-                
-                <!-- ===== CONTACT INFORMATION ===== -->
+
+                <!-- BUSINESS ADVERT 2 -->
+                <div class="form-section">
+                    <h3>Business Advert 2</h3>
+
+                    <div class="form-group">
+                        <label for="advert_2_title">Advert 2 Title</label>
+                        <input type="text" id="advert_2_title" name="advert_2_title" value="{{ data.advert_2_title if data else 'Business Advert 2' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="advert_2_description">Advert 2 Description</label>
+                        <textarea id="advert_2_description" name="advert_2_description" rows="3">{{ data.advert_2_description if data else '' }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="advert_2_price">Price / Offer</label>
+                        <input type="text" id="advert_2_price" name="advert_2_price" value="{{ data.advert_2_price if data else '' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="advert_2_contact">Contact Info</label>
+                        <input type="text" id="advert_2_contact" name="advert_2_contact" value="{{ data.advert_2_contact if data else '' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="advert_2_image">Advert 2 Image</label>
+                        {% if data and data.advert_2_image %}
+                            <div class="current-image">
+                                <img src="{{ url_for('static', filename='images/' + data.advert_2_image) }}" alt="Current advert 2 image" style="max-width:200px;">
+                                <p>Current: {{ data.advert_2_image }}</p>
+                            </div>
+                        {% endif %}
+                        <input type="file" id="advert_2_image" name="advert_2_image" accept="image/*">
+                    </div>
+                </div>
+
+                <!-- CONTACT INFORMATION -->
                 <div class="form-section">
                     <h3>Contact Information</h3>
-                    
                     <div class="form-group">
                         <label for="contact_phone">Phone Number</label>
                         <input type="text" id="contact_phone" name="contact_phone" value="{{ data.contact_phone if data else '0240044138' }}">
-                        <small>Phone number displayed in the contact section</small>
                     </div>
-                    
                     <div class="form-group">
                         <label for="contact_email">Email Address</label>
                         <input type="email" id="contact_email" name="contact_email" value="{{ data.contact_email if data else 'klinsmanagyekum334@gmail.com' }}">
-                        <small>Email address displayed in the contact section</small>
                     </div>
                 </div>
-                
-                <!-- ===== PROFILE CARDS MANAGEMENT ===== -->
+
+                <!-- PROFILE CARDS -->
                 <div class="form-section">
                     <h3>📇 Dynamic Profile Cards</h3>
-                    
                     <div style="margin-bottom: 15px;">
                         <a href="{{ url_for('add_card') }}" class="btn-add-card">+ Add New Card</a>
                     </div>
-                    
+
                     {% if profile_cards %}
                         <div class="cards-list">
                             {% for card in profile_cards %}
@@ -197,369 +214,21 @@
                     {% else %}
                         <p style="color: #6c757d; padding: 20px; background: #f8f9fa; border-radius: 8px; text-align: center;">No cards added yet. Click "Add New Card" to create one.</p>
                     {% endif %}
-                    
-                    <div class="info-box">
-                        <p><strong>Note:</strong> These cards are completely invisible on the website until you add them. They will appear in the features section.</p>
-                    </div>
                 </div>
-                
-                <!-- ===== SAVE BUTTONS ===== -->
+
+                <!-- SAVE -->
                 <div class="form-actions">
                     <button type="submit" class="btn-save">💾 Save All Changes</button>
                     <a href="{{ url_for('index') }}" class="btn-preview" target="_blank">👁️ Preview Website</a>
                 </div>
-                
+
             </form>
         </div>
     </div>
 </div>
 
 <style>
-.admin-dashboard {
-    padding: 40px 0;
-    background: #f0f2f5;
-    min-height: 80vh;
-}
-
-.dashboard-header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 30px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.dashboard-header h1 {
-    color: #1a1a2e;
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-}
-
-.dashboard-header p {
-    color: #6c757d;
-    font-size: 1.1rem;
-}
-
-.header-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.btn-view-site, .btn-logout {
-    padding: 8px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-}
-
-.btn-view-site {
-    background: #f7971e;
-    color: #fff;
-}
-
-.btn-view-site:hover {
-    background: #e67e22;
-    transform: translateY(-2px);
-}
-
-.btn-logout {
-    background: #e74c3c;
-    color: #fff;
-}
-
-.btn-logout:hover {
-    background: #c0392b;
-    transform: translateY(-2px);
-}
-
-.dashboard-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.admin-form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.form-section {
-    margin-bottom: 40px;
-    padding-bottom: 30px;
-    border-bottom: 2px solid #f0f2f5;
-}
-
-.form-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.form-section h3 {
-    color: #1a1a2e;
-    margin-bottom: 20px;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #1a1a2e;
-    font-weight: 500;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #f7971e;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-.form-group input[type="file"] {
-    display: block;
-    margin-top: 10px;
-    padding: 12px;
-    border: 2px dashed #e0e0e0;
-    border-radius: 8px;
-    width: 100%;
-    background: #fafafa;
-}
-
-.form-group small {
-    display: block;
-    margin-top: 5px;
-    color: #6c757d;
-    font-size: 0.85rem;
-}
-
-.current-image {
-    margin: 10px 0;
-}
-
-.current-image img {
-    max-width: 200px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.current-image p {
-    margin-top: 5px;
-    color: #6c757d;
-    font-size: 0.9rem;
-}
-
-.cards-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.card-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.card-preview {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-}
-
-.card-thumb {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.card-no-image {
-    width: 60px;
-    height: 60px;
-    background: #e9ecef;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #adb5bd;
-    font-size: 0.8rem;
-}
-
-.card-text-preview {
-    color: #2d3436;
-    font-size: 0.95rem;
-}
-
-.card-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-add-card {
-    display: inline-block;
-    padding: 10px 24px;
-    background: linear-gradient(135deg, #00b894, #00cec9);
-    color: #fff;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.btn-add-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
-}
-
-.btn-edit {
-    padding: 6px 16px;
-    background: #3498db;
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.btn-edit:hover {
-    background: #2980b9;
-}
-
-.btn-delete {
-    padding: 6px 16px;
-    background: #e74c3c;
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.btn-delete:hover {
-    background: #c0392b;
-}
-
-.info-box {
-    margin-top: 15px;
-    padding: 15px 20px;
-    background: #fff3cd;
-    border-radius: 8px;
-    border-left: 4px solid #ffc107;
-}
-
-.info-box p {
-    margin: 0;
-    color: #856404;
-    font-size: 0.95rem;
-}
-
-.form-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 2px solid #f0f2f5;
-}
-
-.btn-save {
-    padding: 14px 30px;
-    background: linear-gradient(135deg, #00b894, #00cec9);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    flex: 2;
-}
-
-.btn-save:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 206, 201, 0.3);
-}
-
-.btn-preview {
-    padding: 14px 30px;
-    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-    transition: all 0.3s;
-    flex: 1;
-}
-
-.btn-preview:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
-}
-
-@media (max-width: 768px) {
-    .admin-form {
-        padding: 20px;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .card-item {
-        flex-direction: column;
-        gap: 10px;
-        align-items: stretch;
-    }
-    
-    .card-preview {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .card-actions {
-        justify-content: center;
-    }
-    
-    .header-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-</style>
-{% endblock %}
+.admin-dashboard { padding: 40px 0; background: #f0f2f5; min-height: 80vh; }
+.dashboard-header { text-align: center; margin-bottom: 40px; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.dashboard-header h1 { color: #1a1a2e; font-size: 2.5rem; margin-bottom: 5px; }
+.dashboard-header p { color
